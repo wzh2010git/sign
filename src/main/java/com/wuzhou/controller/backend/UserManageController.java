@@ -28,6 +28,7 @@ public class UserManageController {
         user.setPassword(password);
         RedisShardedPool.initPool();
         ShardedJedisPool pool = RedisShardedPool.getPool();
+
         Result<User> result = new Result(ResultCode.SUCCESS.getCode(),ResultCode.SUCCESS.getDesc());
         result.setData(user);
         pool.getResource().set(session.getId(), JSONObject.fromObject(user).toString());
