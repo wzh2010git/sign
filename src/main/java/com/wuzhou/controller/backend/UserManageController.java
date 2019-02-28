@@ -3,9 +3,11 @@ package com.wuzhou.controller.backend;
 import com.wuzhou.common.Result;
 import com.wuzhou.common.ResultCode;
 import com.wuzhou.pojo.User;
+import com.wuzhou.service.UserServiceImpl;
 import com.wuzhou.util.CookieUtil;
 import com.wuzhou.util.RedisShardedPool;
 import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,9 +20,14 @@ import javax.servlet.http.HttpSession;
 @RestController
 public class UserManageController {
 
+    @Autowired
+    private UserServiceImpl userService;
+
+
     @ResponseBody
     @RequestMapping(value = "/login.do", method = RequestMethod.POST)
     public Result<User> login(String userName, String password, HttpSession session, HttpServletResponse response){
+        System.out.println("MM" + userService.getAllUser());
         System.out.println("1." + userName + "2." + password);
         System.out.println("Login success...");
         User user = new User();
